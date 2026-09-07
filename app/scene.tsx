@@ -26,7 +26,28 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError}:P
   const key=new T.DirectionalLight(0xfffaf4,2.3);key.position.set(-2,4,3);scene.add(key);
   const rim=new T.DirectionalLight(0xe9f0ff,1.8);rim.position.set(2,2,-3);scene.add(rim);
   const ground=new T.Mesh(new T.CircleGeometry(30,96),new T.MeshStandardMaterial({color:0xd5d9dc,roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-.019;scene.add(ground);
-  const platform=new T.Mesh(new T.CylinderGeometry(.68,.7,.028,100),new T.MeshStandardMaterial({color:0xeeeeec,metalness:.12,roughness:.67}));platform.position.y=-.016;scene.add(platform);
+  const platformSide=new T.MeshStandardMaterial({color:0xeeeeec,metalness:.12,roughness:.67});
+  const platformTop=new T.MeshStandardMaterial({color:0xffffff,metalness:.03,roughness:.82});
+  const platform=new T.Mesh(new T.CylinderGeometry(.68,.7,.028,100),[platformSide,platformTop,platformSide]);platform.position.y=-.016;scene.add(platform);
+  // Ease Physio mark on the stage, seen once the camera orbits down to the platform.
+  let brandTexture:T.CanvasTexture|undefined;
+  const brandMark=new Image();
+  brandMark.onload=()=>{
+   if(disposed)return;
+   const size=1024,canvas=document.createElement('canvas');canvas.width=canvas.height=size;
+   const g=canvas.getContext('2d');if(!g)return;
+   g.fillStyle='#eeeeec';g.fillRect(0,0,size,size);
+   // The cap's UVs run world +z along canvas x and world +x along canvas -y, so the
+   // mark needs a quarter turn to read left-to-right from the default camera. Sit it
+   // in front of the feet rather than under them.
+   const w=size*.34,h=w*brandMark.height/brandMark.width;
+   g.translate(size*.72,size*.5);g.rotate(-Math.PI/2);
+   g.drawImage(brandMark,-w/2,-h/2,w,h);
+   brandTexture=new T.CanvasTexture(canvas);brandTexture.colorSpace=T.SRGBColorSpace;
+   brandTexture.anisotropy=renderer.capabilities.getMaxAnisotropy();
+   platformTop.map=brandTexture;platformTop.needsUpdate=true;dirty=true;
+  };
+  brandMark.src='/ease-logo.png';
   const ring=new T.Mesh(new T.RingGeometry(.63,.632,128),new T.MeshBasicMaterial({color:0x8c969f,transparent:true,opacity:.4,side:T.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.y=.001;scene.add(ring);
   const innerRing=new T.Mesh(new T.RingGeometry(.55,.551,128),new T.MeshBasicMaterial({color:0xa4aeb8,transparent:true,opacity:.16,side:T.DoubleSide}));innerRing.rotation.x=-Math.PI/2;innerRing.position.y=.001;scene.add(innerRing);
   const width=T.MathUtils.ceilPowerOfTwo(atlas.parts.length),data=new Float32Array(width*4),partTexture=new T.DataTexture(data,width,1,T.RGBAFormat,T.FloatType);partTexture.needsUpdate=true;
@@ -128,7 +149,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError}:P
 
   };animate();
   const contextLost=(e:Event)=>{e.preventDefault();onError('The 3D session was paused by your device. Reload to continue.');};renderer.domElement.addEventListener('webglcontextlost',contextLost);
-  return()=>{disposed=true;abort.abort();cancelAnimationFrame(frame);observer.disconnect();controls.dispose();geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());scene.traverse(o=>{if(o instanceof T.Mesh&&!geometries.includes(o.geometry)){o.geometry.dispose();const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>m.dispose());}});env.dispose();partTexture.dispose();selectionTexture.dispose();markerGeometry.dispose();markerMaterial.dispose();hover.remove();renderer.dispose();renderer.domElement.remove();};
+  return()=>{disposed=true;brandTexture?.dispose();abort.abort();cancelAnimationFrame(frame);observer.disconnect();controls.dispose();geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());scene.traverse(o=>{if(o instanceof T.Mesh&&!geometries.includes(o.geometry)){o.geometry.dispose();const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>m.dispose());}});env.dispose();partTexture.dispose();selectionTexture.dispose();markerGeometry.dispose();markerMaterial.dispose();hover.remove();renderer.dispose();renderer.domElement.remove();};
  },[atlas]);
  return <div className="scene" ref={host}/>;
 }

@@ -121,9 +121,10 @@ h1 .edition{color:var(--brand-deep);border-color:#e6157f33;background:#fdeaf2}
 .about-copy a{color:var(--brand-deep)}
 
 /* Brand lockup rides in the existing eyebrow row, so header height is unchanged. */
-.brand-lockup{display:inline-flex;align-items:center;gap:7px;pointer-events:auto;text-decoration:none;flex-shrink:0}
-.brand-logo{height:15px;width:auto;display:block}
-.brand-word{font-size:12px;font-weight:600;letter-spacing:.13em;color:var(--brand-deep);line-height:1}
+.brand-lockup{display:inline-flex;flex-direction:column;align-items:center;gap:3px;pointer-events:auto;text-decoration:none;flex-shrink:0}
+.brand-logo{height:17px;width:auto;display:block}
+/* text-indent cancels the trailing letter-space so the word optically centres. */
+.brand-word{font-size:8px;font-weight:600;letter-spacing:.2em;text-indent:.2em;color:var(--brand-deep);line-height:1}
 .eyebrow-rule{width:1px;height:11px;background:#1f1e1e22;flex-shrink:0}
 .eyebrow-tag{display:inline-flex;align-items:center;gap:8px;min-width:0}
 
@@ -136,20 +137,35 @@ h1 .edition{color:var(--brand-deep);border-color:#e6157f33;background:#fdeaf2}
 @media(max-width:767px){
  .layers-panel.mobile-open,.detail-sheet{background:#fffdfcf5}
  .bottom-dock{background:#fffdfced}
- .brand-logo{height:13px}.brand-word{font-size:10px;letter-spacing:.11em}
+ .brand-lockup{gap:2px}
+ .brand-logo{height:14px}.brand-word{font-size:7px;letter-spacing:.19em;text-indent:.19em}
  .footer-credits{gap:10px}.creator-mark{font-size:10px}
 }
 @media(max-width:430px){.eyebrow-rule,.eyebrow-tag{display:none}}
 @media(max-width:350px){
- .brand-logo{height:12px}.brand-word{font-size:9px}
+ .brand-logo{height:14px}.brand-word{font-size:6.5px;letter-spacing:.17em;text-indent:.17em}
  .creator-mark{font-size:9px}.footer-credits{gap:7px}
 }
 @media(max-height:600px) and (orientation:landscape){
- .brand-logo{height:13px}.brand-word{font-size:10px}
+ .brand-logo{height:15px}.brand-word{font-size:7px;letter-spacing:.19em;text-indent:.19em}
  .eyebrow-rule,.eyebrow-tag{display:none}
  .creator-mark{font-size:10px}
  /* Short landscape leaves ~22px under the dock; keep the footer line box
     tight so the credits row clears the dock's bottom edge. */
  .studio-footer,.footer-credits,.creator-mark,.studio-footer button{line-height:1}
  .footer-credits{gap:10px}
+}
+
+/* Dock divider moves off the button, so the hover fill sits square on the
+   icon and label instead of spilling into the one-sided spacing padding. */
+.dock-layers,.dock-reset{position:relative;border:0;border-radius:10px}
+.dock-reset{padding:10px 11px;margin-left:10px}
+.dock-layers{padding:9px 11px;margin-right:10px}
+.dock-layers::after,.dock-reset::after{content:'';position:absolute;top:4px;bottom:4px;width:1px;background:#1f1e1e18}
+.dock-reset::after{left:-10px}
+.dock-layers::after{right:-10px}
+@media(max-width:767px){
+ .dock-reset{padding:10px 8px;margin-left:8px;min-width:44px;min-height:48px}
+ .dock-layers{padding:9px 8px;margin-right:8px;min-width:44px;min-height:48px}
+ .dock-reset::after{left:-8px}.dock-layers::after{right:-8px}
 }
