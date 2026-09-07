@@ -86,3 +86,70 @@ h1 .edition{font-family:inherit;font-weight:500;font-size:10px;letter-spacing:.0
 @media(max-width:767px){body:has(.detail-sheet) .view-controls{visibility:hidden}}
 
 @media(max-height:600px) and (orientation:landscape){body:has(.detail-sheet) .bottom-dock{left:12px;right:324px;width:auto;transform:none;max-width:none;margin:0}}
+
+/* ---------------- Ease Physio brand layer ---------------- */
+/* Palette and type taken from the Ease Physio site: Outfit/Inter,
+   magenta-to-orange gradient, warm neutral ground. */
+:root{
+ --brand:#e6157f;--brand-mid:#ef5777;--brand-warm:#f47b20;--brand-deep:#c1126b;
+ --brand-gradient:linear-gradient(135deg,#e6157f 0%,#ef5777 50%,#f47b20 100%);
+ --background:#fbf7f4;--foreground:#1f1e1e;
+ --card:#fffdfc;--card-foreground:#1f1e1e;--popover:#fffdfc;--popover-foreground:#1f1e1e;
+ --primary:#e6157f;--primary-foreground:#ffffff;
+ --secondary:#f4ece7;--secondary-foreground:#1f1e1e;
+ --muted:#f4ece7;--muted-foreground:#5c5a59;
+ --accent:#fdeaf2;--accent-foreground:#1f1e1e;
+ --border:#1f1e1e18;--input:#1f1e1e22;--ring:#e6157f;
+ font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+ color:var(--foreground);background:var(--background)
+}
+h1,.structure-title,.panel-heading span,.brand-word,.explode-label output{font-family:Outfit,Inter,ui-sans-serif,-apple-system,'Segoe UI',sans-serif}
+h1{letter-spacing:-1px}
+.glass{background:#fffdfceb}
+.status-dot{background:var(--brand);box-shadow:0 0 12px #e6157f40}
+.loading-track i{background:var(--brand)}
+button:focus-visible,a:focus-visible{outline-color:var(--brand)}
+h1 .edition{color:var(--brand-deep);border-color:#e6157f33;background:#fdeaf2}
+.view-controls .active{background:var(--brand);color:#fff;box-shadow:0 2px 6px #e6157f30}
+.layer-presets button[aria-pressed=true]{color:var(--brand-deep)}
+.system-row [data-slot=switch]{--primary:#e6157f}
+.explode-label output{color:var(--brand-deep);background:#fdeaf2;border-color:#e6157f1f}
+.explode-control [data-slot=slider-thumb]{background:var(--brand);box-shadow:0 0 0 1px #e6157f30,0 2px 5px #1f1e1e18}
+.primary-action{background:var(--brand);border-color:var(--brand)}
+.primary-action:hover,.primary-action.active{background:var(--brand-deep)}
+.source-link{color:var(--brand-deep)}
+.about-copy a{color:var(--brand-deep)}
+
+/* Brand lockup rides in the existing eyebrow row, so header height is unchanged. */
+.brand-lockup{display:inline-flex;align-items:center;gap:7px;pointer-events:auto;text-decoration:none;flex-shrink:0}
+.brand-logo{height:15px;width:auto;display:block}
+.brand-word{font-size:12px;font-weight:600;letter-spacing:.13em;color:var(--brand-deep);line-height:1}
+.eyebrow-rule{width:1px;height:11px;background:#1f1e1e22;flex-shrink:0}
+.eyebrow-tag{display:inline-flex;align-items:center;gap:8px;min-width:0}
+
+/* Original-creator credit, bottom corner. */
+.footer-credits{display:flex;align-items:center;gap:14px;pointer-events:auto}
+.creator-mark{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:#8a8482;text-decoration:none;white-space:nowrap}
+.creator-mark i{font-style:normal;color:var(--brand-deep);font-weight:500}
+.creator-mark:hover i{text-decoration:underline}
+
+@media(max-width:767px){
+ .layers-panel.mobile-open,.detail-sheet{background:#fffdfcf5}
+ .bottom-dock{background:#fffdfced}
+ .brand-logo{height:13px}.brand-word{font-size:10px;letter-spacing:.11em}
+ .footer-credits{gap:10px}.creator-mark{font-size:10px}
+}
+@media(max-width:430px){.eyebrow-rule,.eyebrow-tag{display:none}}
+@media(max-width:350px){
+ .brand-logo{height:12px}.brand-word{font-size:9px}
+ .creator-mark{font-size:9px}.footer-credits{gap:7px}
+}
+@media(max-height:600px) and (orientation:landscape){
+ .brand-logo{height:13px}.brand-word{font-size:10px}
+ .eyebrow-rule,.eyebrow-tag{display:none}
+ .creator-mark{font-size:10px}
+ /* Short landscape leaves ~22px under the dock; keep the footer line box
+    tight so the credits row clears the dock's bottom edge. */
+ .studio-footer,.footer-credits,.creator-mark,.studio-footer button{line-height:1}
+ .footer-credits{gap:10px}
+}

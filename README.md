@@ -6,7 +6,7 @@ An interactive 3D anatomy explorer built with React, Three.js, and shadcn/ui. Ta
 
 ## Credits
 
-This project is a derivative work of **[human-atlas](https://github.com/ashemag/human-atlas)** by **[ashemag](https://github.com/ashemag)**, released under the MIT License. The original application code, rendering architecture, and anatomy data pipeline are ashemag's work. This repository is an independent copy maintained by [Abhinav Thorat](https://github.com/Abhinavthorat) with its own modifications; it is not affiliated with or endorsed by the original author.
+This project is a derivative work of **[human-atlas](https://github.com/ashemag/human-atlas)** by **[ashemag](https://github.com/ashemag)**, released under the MIT License. The original application code, rendering architecture, and anatomy data pipeline are ashemag's work. This repository is an independent copy maintained by [Abhinav Thorat](https://github.com/Abhinavthorat), restyled with [Ease Physio](https://www.easephysio.in) branding; it is not affiliated with or endorsed by the original author. The original creator is credited in the interface footer and in the in-app About panel.
 
 The anatomy geometry is **BodyParts3D 4.0**, © The Database Center for Life Science, licensed CC BY 4.0. Full data credits are in [ATTRIBUTION.md](public/ATTRIBUTION.md).
 
