@@ -4,6 +4,12 @@ An interactive 3D anatomy explorer built with React, Three.js, and shadcn/ui. Ta
 
 **[Explore the live demo](https://human-atlas-seven.vercel.app)**
 
+## Credits
+
+This project is a derivative work of **[human-atlas](https://github.com/ashemag/human-atlas)** by **[ashemag](https://github.com/ashemag)**, released under the MIT License. The original application code, rendering architecture, and anatomy data pipeline are ashemag's work. This repository is an independent copy maintained by [Abhinav Thorat](https://github.com/Abhinavthorat) with its own modifications; it is not affiliated with or endorsed by the original author.
+
+The anatomy geometry is **BodyParts3D 4.0**, © The Database Center for Life Science, licensed CC BY 4.0. Full data credits are in [ATTRIBUTION.md](public/ATTRIBUTION.md).
+
 ## Explore
 
 - Orbit, zoom, and select structures directly on the body.
@@ -59,6 +65,6 @@ Import this repository into Vercel as a Vite project. The included `vercel.json`
 
 ## License
 
-Original application code is released under the [MIT License](LICENSE). **The anatomy data has its own CC BY 4.0 license**; preserve the attribution when redistributing it. Third-party dependencies retain their respective licenses.
+Application code is released under the [MIT License](LICENSE) — copyright © 2026 ashemag for the original work, and copyright © 2026 Abhinav Thorat for modifications made in this repository. **The anatomy data has its own CC BY 4.0 license**; preserve the attribution when redistributing it. Third-party dependencies retain their respective licenses.
 
 Issues and pull requests are welcome. Please include reproduction steps and browser/device details for interaction problems.
