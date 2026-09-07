@@ -156,3 +156,12 @@ h1 .edition{color:var(--brand-deep);border-color:#e6157f33;background:#fdeaf2}
  .dock-layers{padding:9px 8px;margin-right:8px;min-width:44px;min-height:48px}
  .dock-reset::after{left:-8px}.dock-layers::after{right:-8px}
 }
+
+/* The empty ground above the horizon read flat, so the EASE mark sits on a layer
+   beneath the now-transparent canvas: the body and the ground plane occlude it,
+   so it never washes over the anatomy. */
+.studio{background:#faf5f2}
+.studio::before{content:'';position:absolute;inset:0;pointer-events:none;
+ background:url(/ease-logo.png) no-repeat 50% 26%;background-size:min(50vw,620px) auto;opacity:.075}
+@media(max-width:767px){.studio::before{background-position:50% 27%;background-size:min(66vw,320px) auto}}
+@media(max-height:600px) and (orientation:landscape){.studio::before{background-position:50% 30%;background-size:min(34vw,300px) auto}}
